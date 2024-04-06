@@ -6,6 +6,10 @@
 
 	export let data: PageData;
 
+	$: images = data.images.sort((a, b) => (a.title > b.title ? 1 : -1));
+
+	$: page = data.blub[0];
+
 	let [minColWidth, maxColWidth, gap] = [200, 800, 20];
 </script>
 
@@ -27,7 +31,7 @@
 			<div class="mx-auto w-4/5 border-b-2 border-red-500 pt-3 opacity-25 lg:mx-0"></div>
 			<p class="flex items-center justify-center pt-4 text-base font-bold lg:justify-start">
 				<iconify-icon icon="bx:bxs-user-circle" class="mr-4 text-xl text-red-500"></iconify-icon>
-				Tattoo Artist
+				Aspiring Artist
 			</p>
 			<a
 				href="https://maps.app.goo.gl/qSCpVuuGmzfTNhVc8"
@@ -38,8 +42,7 @@
 				Ferryside, South Wales
 			</a>
 			<p class="pt-8 text-sm">
-				A skilled tattoo artist based in South Wales. With a passion for turning concepts into
-				compelling art, I specialize in black and gray realism and vibrant contemporary designs.
+				{page.blub}
 			</p>
 
 			<div class="flex flex-wrap items-center justify-center pb-8 pt-12">
@@ -81,7 +84,7 @@
 				<h1 class="pt-8 text-3xl font-bold lg:pt-0">Work</h1>
 				<div class="mx-auto mb-5 w-4/5 border-b-2 border-red-500 pt-3 opacity-25 lg:mx-0"></div>
 
-				<Masonry items={data.images} {minColWidth} {maxColWidth} {gap} let:item>
+				<Masonry items={images} {minColWidth} {maxColWidth} {gap} let:item>
 					<div class="tooltip" data-tip={item.title}>
 						<img
 							src={`https://cms.patfolio.art/assets/${item.id}`}
